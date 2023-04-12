@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /snap/clion/234/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/daniel/Documentos/UFSM/CG/canvas-t1 -B/home/daniel/Documentos/UFSM/CG/canvas-t1/cmake-build-debug
+  command = /snap/clion/234/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/daniel/Documentos/UFSM/CG/t1-vector-graphics -B/home/daniel/Documentos/UFSM/CG/t1-vector-graphics/cmake-build-debug
   description = Re-running CMake...
   generator = 1
 

@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/daniel/Documentos/UFSM/CG/canvas-t1/cmake-build-debug"
+			"value" : "/home/daniel/Documentos/UFSM/CG/t1-vector-graphics/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -543,7 +543,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/daniel/Documentos/UFSM/CG/canvas-t1/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/home/daniel/Documentos/UFSM/CG/t1-vector-graphics/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -603,7 +603,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/daniel/Documentos/UFSM/CG/canvas-t1"
+			"value" : "/home/daniel/Documentos/UFSM/CG/t1-vector-graphics"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1279,7 +1279,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/daniel/Documentos/UFSM/CG/canvas-t1/cmake-build-debug"
+			"value" : "/home/daniel/Documentos/UFSM/CG/t1-vector-graphics/cmake-build-debug"
 		},
 		{
 			"name" : "VectorGraphics_IS_TOP_LEVEL",
@@ -1303,7 +1303,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/daniel/Documentos/UFSM/CG/canvas-t1"
+			"value" : "/home/daniel/Documentos/UFSM/CG/t1-vector-graphics"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",

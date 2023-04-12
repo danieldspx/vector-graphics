@@ -1,0 +1,5 @@
+# ninja log v5
+1	140	1681327207013516300	CMakeFiles/VectorGraphics.dir/src/Relogio.cpp.o	a1f6ff321c6bef5
+1	159	1681327207033518210	CMakeFiles/VectorGraphics.dir/src/gl_canvas2d.cpp.o	c3517891261f8d1d
+0	202	1681327207077522411	CMakeFiles/VectorGraphics.dir/src/main.cpp.o	b5bd0b95a9151b99
+228	345	1681327207217535778	VectorGraphics	93d9720baefd25ef

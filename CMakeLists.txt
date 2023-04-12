@@ -17,6 +17,6 @@ add_executable(
         src/Botao.h
         src/Relogio.cpp src/Relogio.h
         src/Vector2.h
-        src/gl_canvas2d.cpp src/gl_canvas2d.h)
+        src/gl_canvas2d.cpp src/gl_canvas2d.h src/base/interfaces/IRender.h src/base/objects/Circle.cpp src/base/objects/Circle.h)
 
 target_link_libraries(VectorGraphics ${OpenGlLinkers})

@@ -1,3 +1,0 @@
-/home/daniel/Documentos/UFSM/CG/t1-vector-graphics/cmake-build-debug/CMakeFiles/VectorGraphics.dir
-/home/daniel/Documentos/UFSM/CG/t1-vector-graphics/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/daniel/Documentos/UFSM/CG/t1-vector-graphics/cmake-build-debug/CMakeFiles/rebuild_cache.dir

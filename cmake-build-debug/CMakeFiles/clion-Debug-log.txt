@@ -1,5 +1,0 @@
-/snap/clion/234/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/234/bin/ninja/linux/x64/ninja -G Ninja -S /home/daniel/Documentos/UFSM/CG/t1-vector-graphics -B /home/daniel/Documentos/UFSM/CG/t1-vector-graphics/cmake-build-debug
--- Could NOT find OpenGL (missing: OPENGL_opengl_LIBRARY OPENGL_glx_LIBRARY OPENGL_INCLUDE_DIR) 
--- Configuring done
--- Generating done
--- Build files have been written to: /home/daniel/Documentos/UFSM/CG/t1-vector-graphics/cmake-build-debug

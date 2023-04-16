@@ -7,7 +7,7 @@
 
 class IRender {
 public:
-    virtual void render() = 0;
+    virtual void render(int screenWidth, int screenHeight) = 0;
 };
 
 #endif

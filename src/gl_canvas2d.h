@@ -16,6 +16,9 @@
 
 #define Y_CANVAS_CRESCE_PARA_CIMA 0
 
+#define FONT_HEIGHT 8
+#define FONT_WIDTH 4.6
+
 class CV //classe Canvas2D
 {
 public:
@@ -47,6 +50,7 @@ public:
     //especifica a cor de desenho e de limpeza de tela
     static void color(float r, float g, float b);
     static void color(float r, float g, float b, float alpha);
+    static void colorRGB(float r, float g, float b);
     static void color(int index);
 
     static void clear(float r, float g, float b);

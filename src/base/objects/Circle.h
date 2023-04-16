@@ -8,7 +8,7 @@
 #include "../interfaces/IRender.h"
 
 class Circle: public IRender {
-    void render() override;
+    void render(int screenWidth, int screenHeight) override;
 };
 
 

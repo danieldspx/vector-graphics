@@ -196,6 +196,11 @@ void CV::color(float r, float g, float b)
    glColor3d(r, g, b);
 }
 
+void CV::colorRGB(float r, float g, float b)
+{
+    glColor3d(r/255.0, g/255.0, b/255.0);
+}
+
 void CV::color(int idx)
 {
     glColor3fv(Colors[idx]);

@@ -3,7 +3,3 @@
 //
 
 #include "Circle.h"
-
-void Circle::render() {
-
-}

@@ -14,6 +14,7 @@ public:
     int width;
     int height;
     const char* label;
+    bool hovered;
 
     Button(ivec2 pos, int width, int height, const char* label);
     void mouse(int button, int state, int wheel, int direction, ivec2 position) override;

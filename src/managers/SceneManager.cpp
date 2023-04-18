@@ -7,7 +7,10 @@
 
 SceneManager::SceneManager(int screenWidth, int screenHeight) {
     int height = 500;
-    toolbox = new Toolbox(ivec2{0, screenHeight/2 - height/2}, 100, height);
+    auto addEntityCallback = [&](IEntity* entity){
+        this->screenVectors->addEntity(entity, 0);
+    };
+    toolbox = new Toolbox(ivec2{0, screenHeight/2 - height/2}, 100, height, addEntityCallback);
 }
 
 void SceneManager::mouse(int button, int state, int wheel, int direction, ivec2 position) {

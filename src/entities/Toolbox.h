@@ -6,6 +6,7 @@
 #define VECTORGRAPHICS_TOOLBOX_H
 
 
+#include <functional>
 #include "../base/interfaces/IRender.h"
 #include "../base/interfaces/IEntity.h"
 #include "../managers/EntityManager.h"
@@ -16,8 +17,9 @@ public:
     EntityManager* entities;
     int width;
     int height;
+    std::function<void(IEntity*)> addEntityCallback;
 
-    Toolbox(ivec2 position, int width, int height);
+    Toolbox(ivec2 position, int width, int height, std::function<void(IEntity*)> addEntityCallback);
 
     void mouse(int button, int state, int wheel, int direction, ivec2 position) override;
 

@@ -4,11 +4,14 @@
 
 #include <string>
 #include <iostream>
+#include <utility>
 #include "Button.h"
 #include "../base/vectors/Vector2D.h"
 #include "../gl_canvas2d.h"
 
-Button::Button(ivec2 pos, int width, int height, const char* label): pos(pos), width(width), height(height), label(label) {
+Button::Button(ivec2 pos, int width, int height, const char* label, std::function<void(IEntity*)> _addEntityCallback): pos(pos), width(width), height(height), label(label) {
+    addEntityCallback = std::move(_addEntityCallback);
+    _addEntityCallback = nullptr;
     hovered = false;
 }
 

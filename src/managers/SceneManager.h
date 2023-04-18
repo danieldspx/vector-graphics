@@ -13,6 +13,7 @@
 class SceneManager: public IMouse, public IRender {
 public:
     Toolbox* toolbox;
+    EntityManager* screenVectors;
 
     SceneManager(int screenWidth, int screenHeight);
     void mouse(int button, int state, int wheel, int direction, ivec2 position) override;

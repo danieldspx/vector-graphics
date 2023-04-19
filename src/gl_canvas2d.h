@@ -42,9 +42,11 @@ public:
 
     //centro e raio do circulo
     static void circle( float x, float y, float radius, int div );
+    static void circle( float x, float y, float radius, int div, float ang );
     static void circle( Vector2 pos, float radius, int div );
 
     static void circleFill( float x, float y, float radius, int div );
+    static void circleFill( float x, float y, float radius, int div, float ang );
     static void circleFill( Vector2 pos, float radius, int div );
 
     //especifica a cor de desenho e de limpeza de tela

@@ -19,6 +19,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "gl_canvas2d.h"
 
@@ -50,6 +51,7 @@ void render() {
 }
 
 int main(void) {
+    srand (time(nullptr));
     CV::init(&screenWidth, &screenHeight, "Vemp - Vectors Manipulation Program");
     CV::run();
 }

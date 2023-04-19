@@ -7,13 +7,17 @@
 #include <utility>
 #include "Button.h"
 #include "../base/vectors/Vector2D.h"
+#include "../base/enums/Shape.h"
 #include "../gl_canvas2d.h"
 
 Toolbox::Toolbox(ivec2 position, int width, int height, std::function<void(IEntity*)> _addEntityCallback): pos(position), width(width), height(height) {
     addEntityCallback = std::move(_addEntityCallback);
     _addEntityCallback = nullptr;
     entities = new EntityManager();
-    entities->addEntity(new Button(ivec2{pos.x,pos.y}, 100, 50, "Circle", addEntityCallback), 0);
+    int buttonHeight = 50;
+    entities->addEntity(new Button(ivec2{pos.x,pos.y}, width, buttonHeight, Triangle, addEntityCallback), 0);
+    entities->addEntity(new Button(ivec2{pos.x,pos.y + buttonHeight}, width, buttonHeight, Square, addEntityCallback), 0);
+    entities->addEntity(new Button(ivec2{pos.x,pos.y + buttonHeight*2}, width, buttonHeight, Hexagon, addEntityCallback), 0);
 }
 
 void Toolbox::mouse(int button, int state, int wheel, int direction, ivec2 position) {

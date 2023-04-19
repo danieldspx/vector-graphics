@@ -11,10 +11,11 @@
 
 class Triangle: public IEntity {
 public:
-    ivec2 center, p1, p2, p3;
-    float r, g, b, size;
+    int screenWidth, screenHeight;
+    fvec2 translate;
+    fvec2 p1, p2, p3;
 
-    Triangle(ivec2 center, float size, float r, float g, float b);
+    Triangle(fvec2 p1, fvec2 p2, fvec2 p3, fvec2 translate);
 
     void mouse(int button, int state, int wheel, int direction, ivec2 position) override;
 

@@ -147,32 +147,42 @@ void CV::clear(float r, float g, float b)
 
 void CV::circle( float x, float y, float radius, int div )
 {
-   float ang = 0, x1, y1;
+   circle(x, y, radius, div, 0);
+}
+
+void CV::circle( float x, float y, float radius, int div, float ang )
+{
+    float x1, y1;
+    float inc = PI_2/div;
+    glBegin(GL_LINE_LOOP);
+    for(int lado = 1; lado <= div; lado++) //GL_LINE_LOOP desenha um poligono fechado. Liga automaticamente o primeiro e ultimio vertices.
+    {
+        x1 = (cos(ang)*radius);
+        y1 = (sin(ang)*radius);
+        glVertex2d(x1+x, y1+y);
+        ang+=inc;
+    }
+    glEnd();
+}
+
+void CV::circleFill( float x, float y, float radius, int div, float ang)
+{
+   float x1, y1;
    float inc = PI_2/div;
-   glBegin(GL_LINE_LOOP);
-      for(int lado = 1; lado <= div; lado++) //GL_LINE_LOOP desenha um poligono fechado. Liga automaticamente o primeiro e ultimio vertices.
-      {
-         x1 = (cos(ang)*radius);
-         y1 = (sin(ang)*radius);
-         glVertex2d(x1+x, y1+y);
-         ang+=inc;
-      }
+   glBegin(GL_POLYGON);
+   for(int lado = 1; lado <= div; lado++) //GL_POLYGON desenha um poligono CONVEXO preenchido.
+   {
+      x1 = (cos(ang)*radius);
+      y1 = (sin(ang)*radius);
+      glVertex2d(x1+x, y1+y);
+      ang+=inc;
+   }
    glEnd();
 }
 
 void CV::circleFill( float x, float y, float radius, int div )
 {
-   float ang = 0, x1, y1;
-   float inc = PI_2/div;
-   glBegin(GL_POLYGON);
-      for(int lado = 1; lado <= div; lado++) //GL_POLYGON desenha um poligono CONVEXO preenchido.
-      {
-         x1 = (cos(ang)*radius);
-         y1 = (sin(ang)*radius);
-         glVertex2d(x1+x, y1+y);
-         ang+=inc;
-      }
-   glEnd();
+    circleFill(x, y, radius, div, 0);
 }
 
 //coordenada de offset para desenho de objetos.

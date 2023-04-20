@@ -6,6 +6,7 @@
 #include "../base/vectors/Vector2D.h"
 #include "../base/enums/MouseButton.h"
 #include "../base/enums/MouseState.h"
+#include "../base/interfaces/IShape.h"
 #include <iostream>
 
 EntityManager::EntityManager() {
@@ -32,18 +33,36 @@ void EntityManager::render(int screenWidth, int screenHeight) {
 }
 
 void EntityManager::mouse(int button, int state, int wheel, int direction, ivec2 position) {
+    entityController.hovered = nullptr;
+
+    // We need to reset the focused entity every time because we might be clicking another shape that overlaps
+    // an already focused entity. Even if we are clicking in the focused shape we can safely do this because
+    // the code below will focus it again.
+    if (button == MouseButton::Left && state == MouseState::Down && entityController.focused) {
+        entityController.focused->resetFocus();
+        entityController.focused->resetHover();
+        entityController.focused = nullptr;
+    }
+
+    // We iterate in reverse because the ones in the latest positions are the ones in the top
+    // So any interaction happens with them first
     for (auto it = entities.rbegin(); it != entities.rend(); ++it) {
         const auto& pair = *it;
         for (auto vecIt = pair.second.rbegin(); vecIt != pair.second.rend(); ++vecIt) {
             auto entity = (*vecIt);
             entity->mouse(button, state, wheel, direction, position);
+            auto shapeEntity = dynamic_cast<IShape *>(entity);
             if (entity->isIntersecting(position)) {
-                if (entity->isFocused()) {
+                if (entity->isFocused() && !entityController.focused) {
                     entityController.focused = entity;
-                    entityController.hovered = nullptr;
-                } else if (entity->isHovered()) {
-                    entityController.focused = nullptr;
+                }
+
+                if (entity->isHovered() && !entityController.hovered) {
                     entityController.hovered = entity;
+                }
+
+                if (shapeEntity && shapeEntity->isDragging() && !entityController.shapeDragging) {
+                    entityController.shapeDragging = shapeEntity;
                 }
             }
 
@@ -51,21 +70,21 @@ void EntityManager::mouse(int button, int state, int wheel, int direction, ivec2
             if (entityController.focused && entity != entityController.focused) {
                 entity->resetFocus();
             }
-            // Disble hover if it is not the shape being hovered
-            if (entityController.hovered && entity != entityController.hovered) {
+            // Disble hover if there is some shape being dragged OR it is not the shape being hovered
+            if (entityController.shapeDragging || (entityController.hovered && entity != entityController.hovered)) {
                 entity->resetHover();
+            }
+
+            if (shapeEntity && entityController.shapeDragging && shapeEntity != entityController.shapeDragging) {
+                shapeEntity->resetDrag();
             }
         }
     }
 
     if (button == MouseButton::Left && state == MouseState::Up) {
-        // We iterate in reverse because the ones in the latest positions are the ones in the top
-        // So any interaction happens with them first
-        if (entityController.focused && !entityController.focused->isIntersecting(position)) {
-            entityController.focused->resetFocus();
-            entityController.focused->resetHover();
-            entityController.focused = nullptr;
-            entityController.hovered = nullptr;
+        if (entityController.shapeDragging) {
+            entityController.shapeDragging->resetDrag();
+            entityController.shapeDragging = nullptr;
         }
     }
 }

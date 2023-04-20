@@ -80,7 +80,6 @@ bool RegularShape::isIntersecting(ivec2 position) {
 void RegularShape::click(int button, int state, int wheel, int direction, ivec2 position) {
     if (state == MouseState::Down) {
         dragging = focused = true;
-        printf("\nRegular Shape focused %d\n", focused);
         startDraggingPos = fvec2{static_cast<float>(position.x), static_cast<float>(position.y)};
     }
 }

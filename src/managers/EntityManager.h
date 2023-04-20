@@ -10,6 +10,7 @@
 #include "../base/interfaces/IRender.h"
 #include "../base/interfaces/IMouse.h"
 #include "../base/interfaces/IEntity.h"
+#include "../base/interfaces/IShape.h"
 
 #define uint unsigned int
 
@@ -24,6 +25,7 @@ public:
     struct EntityController {
         IEntity* focused;
         IEntity* hovered;
+        IShape* shapeDragging;
     };
     std::map<uint, std::vector<IEntity*>> entities;
 

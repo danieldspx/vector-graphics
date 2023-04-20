@@ -12,6 +12,14 @@ public:
     fvec2 translate, startDraggingPos, hitBoxMin, hitBoxMax;
     bool dragging;
 
+    bool isDragging() const {
+        return dragging;
+    }
+
+    void resetDrag() {
+        dragging = false;
+    }
+
     IShape() {
         translate = fvec2 {0,0};
         dragging = false;

@@ -21,6 +21,10 @@
  */
 class EntityManager: public IRender, public IMouse {
 public:
+    struct EntityController {
+        IEntity* focused;
+        IEntity* hovered;
+    };
     std::map<uint, std::vector<IEntity*>> entities;
 
     EntityManager();
@@ -29,6 +33,9 @@ public:
 
     void render(int screenWidth, int screenHeight) override;
     void mouse(int button, int state, int wheel, int direction, ivec2 position) override;
+
+private:
+    EntityController entityController;
 
     // TODO: Implement method to move entitites between layers
 };

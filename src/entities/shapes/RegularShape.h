@@ -10,19 +10,18 @@
 
 class RegularShape: public IShape {
 public:
-    fvec2 translate, center, rectMin, rectMax;
+    fvec2 center;
     int div;
     float radius, ang, r, g, b;
-    bool hover;
 
 
-    RegularShape(fvec2 center, float radius, int div);
+    RegularShape(fvec2 center, float radius, int div, float ang);
 
     void mouse(int button, int state, int wheel, int direction, ivec2 position) override;
 
     void render(int screenWidth, int screenHeight) override;
 
-    bool isIntersecting(ivec2 position);
+    bool isIntersecting(ivec2 position) override;
 
     void click(int button, int state, int wheel, int direction, ivec2 position);
 };

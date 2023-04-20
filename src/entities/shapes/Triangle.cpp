@@ -13,7 +13,7 @@ void Triangle::render(int _screenWidth, int _screenHeight) {
     screenWidth = _screenWidth;
     screenHeight = _screenHeight;
     glPushMatrix(); // pushes the current matrix stack down by one, duplicating the current matrix. That is, after a glPushMatrix call, the matrix on top of the stack is identical to the one below it.
-    CV::translate(translate.x, translate.y);
+//    CV::translate(translate.x, translate.y);
     CV::colorRGB(84, 147, 255);
     float vx[] = { p1.x, p2.x, p3.x };
     float vy[] = { p1.y, p2.y, p3.y };

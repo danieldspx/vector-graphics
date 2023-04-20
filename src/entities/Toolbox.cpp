@@ -31,3 +31,8 @@ void Toolbox::render(int screenWidth, int screenHeight) {
 
     entities->render(screenWidth, screenHeight);
 }
+
+bool Toolbox::isIntersecting(ivec2 position) {
+    // For now there is no interesting action we want to do when intersecting the toolbox
+    return false;
+}

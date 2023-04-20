@@ -15,7 +15,6 @@
 Button::Button(ivec2 pos, int width, int height, Shape shapeType, std::function<void(IEntity*)> _addEntityCallback): pos(pos), width(width), height(height), shapeType(shapeType) {
     addEntityCallback = std::move(_addEntityCallback);
     _addEntityCallback = nullptr;
-    hovered = false;
 
     switch (shapeType) {
         case Triangle:
@@ -90,17 +89,17 @@ void Button::createShape() {
 void Button::createTriangle() {
     printf("\nAdding Triangle Entity");
     float radius = 30;
-    addEntityCallback(new RegularShape(fvec2{static_cast<float>(screenWidth/2), static_cast<float>(screenHeight/2)}, radius, 3));
+    addEntityCallback(new RegularShape(fvec2{static_cast<float>(screenWidth/2), static_cast<float>(screenHeight/2)}, radius, 3, PI/2));
 }
 
 void Button::createSquare() {
     printf("\nAdding Square Entity");
     float radius = 30;
-    addEntityCallback(new RegularShape(fvec2{static_cast<float>(screenWidth/2), static_cast<float>(screenHeight/2)}, radius, 4));
+    addEntityCallback(new RegularShape(fvec2{static_cast<float>(screenWidth/2), static_cast<float>(screenHeight/2)}, radius, 4, PI/4));
 }
 
 void Button::createHexagon() {
     printf("\nAdding Hexagon Entity");
     float radius = 30;
-    addEntityCallback(new RegularShape(fvec2{static_cast<float>(screenWidth/2), static_cast<float>(screenHeight/2)}, radius, 5));
+    addEntityCallback(new RegularShape(fvec2{static_cast<float>(screenWidth/2), static_cast<float>(screenHeight/2)}, radius, 6, 0));
 }

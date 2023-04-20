@@ -2,7 +2,7 @@
 // Created by daniel on 14/04/23.
 //
 
-#ifndef VECTORGRAPHICS_BUTTON_H
+#ifndef VECTORGRAPHICS_MOUSEBUTTON_H
 #define VECTORGRAPHICS_BUTTON_H
 
 #include "../base/vectors/Vector2D.h"
@@ -15,7 +15,6 @@ public:
     ivec2 pos;
     int width, height, screenWidth, screenHeight;
     const char* label;
-    bool hovered;
     Shape shapeType;
     std::function<void(IEntity*)> addEntityCallback;
 
@@ -39,4 +38,4 @@ public:
 };
 
 
-#endif //VECTORGRAPHICS_BUTTON_H
+#endif //VECTORGRAPHICS_MOUSEBUTTON_H

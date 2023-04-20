@@ -19,6 +19,8 @@ public:
     int height;
     std::function<void(IEntity*)> addEntityCallback;
 
+    bool isIntersecting(ivec2 position) override;
+
     Toolbox(ivec2 position, int width, int height, std::function<void(IEntity*)> addEntityCallback);
 
     void mouse(int button, int state, int wheel, int direction, ivec2 position) override;

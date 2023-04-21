@@ -24,6 +24,12 @@ public:
     bool isIntersecting(ivec2 position) override;
 
     void click(int button, int state, int wheel, int direction, ivec2 position);
+
+    void renderRotateButton();
+
+    bool isIntersectingRotateButton(ivec2 position);
+
+    void clickRotateButton(int button, int state, int wheel, int direction, ivec2 position);
 };
 
 

@@ -6,11 +6,13 @@
 #define VECTORGRAPHICS_ISHAPE_H
 
 #include "IEntity.h"
+#include <cmath>
 
 class IShape: public IEntity {
 public:
-    fvec2 translate, startDraggingPos, hitBoxMin, hitBoxMax;
-    bool dragging;
+    fvec2 translate, startDraggingPos, startRotatingPos, hitBoxMin, hitBoxMax, rotateButtonPos;
+    bool dragging, rotating;
+    float angRotateButton, rotateButtonRadius, rotateButtonDistance;
 
     bool isDragging() const {
         return dragging;
@@ -22,7 +24,10 @@ public:
 
     IShape() {
         translate = fvec2 {0,0};
-        dragging = false;
+        dragging = rotating = false;
+        angRotateButton = M_PI_2;
+        rotateButtonRadius = 6;
+        rotateButtonDistance = 18;
     }
 };
 

@@ -36,6 +36,12 @@ public:
     bool operator==(Vector2D<T> v);
 
     T &operator[](int idx);
+
+    T distance(Vector2D<T> v1);
+
+    T modulo();
+
+    T scalar(Vector2D<T> v1);
 };
 
 template<class T>
@@ -100,6 +106,21 @@ T &Vector2D<T>::operator[](int idx) {
     if (idx == 0) return x;
     if (idx == 1) return y;
     throw std::out_of_range("Index out of bounds");
+}
+
+template<class T>
+T Vector2D<T>::distance(Vector2D<T> v1) {
+    return sqrt(pow(x - v1.x, 2) + pow(y - v1.y, 2));
+}
+
+template<class T>
+T Vector2D<T>::modulo() {
+    return sqrt(pow(x, 2) + pow(y, 2));
+}
+
+template<class T>
+T Vector2D<T>::scalar(Vector2D<T> v1) {
+    return x*v1.x + y*v1.y;
 }
 
 typedef Vector2D<int> ivec2;

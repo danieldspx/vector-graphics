@@ -38,6 +38,8 @@ public:
     void changeFocusedEntityRandomColor();
     void removeFocusedEntity();
     void swapFocusedEntity(int direction);
+    void saveEntitiesToFile(const std::string &filePath);
+    void loadEntitiesFromFile(const std::string &filePath);
 private:
     EntityController entityController{};
 };

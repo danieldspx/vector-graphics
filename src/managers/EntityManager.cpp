@@ -5,15 +5,16 @@
 #include "EntityManager.h"
 #include "../base/enums/MouseButton.h"
 #include "../base/enums/MouseState.h"
+#include "../entities/shapes/RegularShape.h"
 #include <iostream>
 #include <algorithm>
+#include <fstream>
 
 EntityManager::EntityManager() {
     entityController = EntityController{nullptr, nullptr};
 }
 
 void EntityManager::addEntity(IEntity *entity, uint layer = 0) {
-//    std::cout << "[ENTITY] Pushing entity back to the layer: " << layer << std::endl;
     auto it = this->entities.find(layer);
     if (it == this->entities.end()) {
         this->entities.insert(std::pair<uint, std::vector<IEntity *>>(layer, std::vector<IEntity *>{entity}));
@@ -118,5 +119,66 @@ void EntityManager::swapFocusedEntity(int direction) {
             }
         }
     }
+}
+
+void EntityManager::saveEntitiesToFile(const std::string& filePath) {
+    std::ofstream file(filePath, std::ios::binary);
+    if (!file.is_open()) {
+        throw std::runtime_error("Failed to open file for writing: " + filePath);
+    }
+
+    std::vector<IEntity*> entitiesVect = entities[0];
+    printf("\nSaving entities...\n");
+    IEntity::Entity2File* sts = new IEntity::Entity2File[entitiesVect.size()];
+    printf("\nTotal entities: %d\n", entitiesVect.size());
+
+    int pos = 0;
+    for (auto& entity: entitiesVect) {
+        sts[pos] = dynamic_cast<IShape *>(entity)->entityToStruc();
+        printf("\nEntity to struct at: (%f, %f)\n", sts[pos].centerX, sts[pos].centerY);
+        pos++;
+    }
+
+    printf("\nWriting: %d\n", sizeof(IEntity::Entity2File) * entitiesVect.size());
+    file.write(reinterpret_cast<const char*>(sts), sizeof(IEntity::Entity2File) * entitiesVect.size());
+
+    file.close();
+    delete[] sts;
+}
+
+// Loads the entities from a binary file
+void EntityManager::loadEntitiesFromFile(const std::string& filePath) {
+   std::ifstream infile(filePath, std::ios::binary);
+    printf("Clearing all entities first");
+    entities[0].clear();
+    printf("\nLoading entities...\n");
+   // determine the size of the file
+   infile.seekg(0, std::ios::end);
+   std::streampos size = infile.tellg();
+   infile.seekg(0, std::ios::beg);
+
+   // determine the size of the array
+   int num_sts = size / sizeof(IEntity::Entity2File);
+    printf("\nTotal of entities: %d\n", num_sts);
+
+   // create an array of structs
+   IEntity::Entity2File* sts = new IEntity::Entity2File[num_sts];
+
+   // read the array data from the file
+   infile.read(reinterpret_cast<char*>(sts), size);
+
+   // close the file
+   infile.close();
+
+   // iterate the array data
+   for (int i = 0; i < num_sts; ++i) {
+       auto entityStuct = sts[i];
+       auto regShape = new RegularShape(fvec2{entityStuct.centerX, entityStuct.centerY}, entityStuct.radius, entityStuct.div, entityStuct.ang);
+       regShape->setToColor(entityStuct.r, entityStuct.g, entityStuct.b);
+       entities[0].push_back(regShape);
+   }
+
+   // free the array memory
+   delete[] sts;
 }
 

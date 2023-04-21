@@ -7,9 +7,12 @@
 #include "../../base/enums/MouseState.h"
 #include <cmath>
 
-RegularShape::RegularShape(fvec2 center, float _radius, int div, float _ang): center(center), radius(_radius), div(div) {
+RegularShape::RegularShape(fvec2 _center, float _radius, int _div, float _ang) {
     resetFocus();
     resetHover();
+    center = _center;
+    radius = _radius;
+    div = _div;
     startRadius = _radius;
     ang = startAng = _ang;
     minRadius = 15;

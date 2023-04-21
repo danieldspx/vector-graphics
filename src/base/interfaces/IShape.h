@@ -10,9 +10,12 @@
 
 class IShape: public IEntity {
 public:
-    fvec2 translate, startDraggingPos, startRotatingPos, startScalingPos, hitBoxMin, hitBoxMax, rotateButtonPos, scaleShapePos;
+    fvec2 startDraggingPos, startRotatingPos, startScalingPos, hitBoxMin, hitBoxMax, rotateButtonPos, scaleShapePos;
     bool dragging, rotating, scaling;
     float angRotateButton, ang, startAng, startAngRotateButton, rotateButtonRadius, rotateButtonDistance, scaleButtonRadius, scaleButtonDistance, startScaleButtonDistance;
+    fvec2 center;
+    int div;
+    float radius, startRadius, minRadius;
 
     bool isDragging() const {
         return dragging;
@@ -27,7 +30,6 @@ public:
     }
 
     IShape() {
-        translate = fvec2 {0,0};
         dragging = rotating = scaling = false;
         angRotateButton = startAngRotateButton = M_PI_2;
         ang = startAng = 0;
@@ -37,7 +39,19 @@ public:
         resetScaleButtonDistance();
     }
 
-
+   Entity2File entityToStruc() {
+       printf("\nReturning complete struct for entity\n");
+       return Entity2File{
+               .r = r,
+               .g = g,
+               .b = b,
+               .centerX = center.x,
+               .centerY = center.y,
+               .radius = radius,
+               .div = div,
+               .ang = ang
+       };
+   }
 };
 
 #endif //VECTORGRAPHICS_ISHAPE_H

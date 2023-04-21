@@ -10,9 +10,9 @@
 
 class IShape: public IEntity {
 public:
-    fvec2 translate, startDraggingPos, startRotatingPos, hitBoxMin, hitBoxMax, rotateButtonPos;
-    bool dragging, rotating;
-    float angRotateButton, ang, startAng, startAngRotateButton, rotateButtonRadius, rotateButtonDistance;
+    fvec2 translate, startDraggingPos, startRotatingPos, startScalingPos, hitBoxMin, hitBoxMax, rotateButtonPos, scaleShapePos;
+    bool dragging, rotating, scaling;
+    float angRotateButton, ang, startAng, startAngRotateButton, rotateButtonRadius, rotateButtonDistance, scaleButtonRadius, scaleButtonDistance, startScaleButtonDistance;
 
     bool isDragging() const {
         return dragging;
@@ -22,14 +22,22 @@ public:
         dragging = false;
     }
 
+    void resetScaleButtonDistance() {
+        scaleButtonDistance = 2;
+    }
+
     IShape() {
         translate = fvec2 {0,0};
-        dragging = rotating = false;
+        dragging = rotating = scaling = false;
         angRotateButton = startAngRotateButton = M_PI_2;
         ang = startAng = 0;
         rotateButtonRadius = 6;
+        scaleButtonRadius = 6;
         rotateButtonDistance = 18;
+        resetScaleButtonDistance();
     }
+
+
 };
 
 #endif //VECTORGRAPHICS_ISHAPE_H

@@ -3,10 +3,8 @@
 //
 
 #include "EntityManager.h"
-#include "../base/vectors/Vector2D.h"
 #include "../base/enums/MouseButton.h"
 #include "../base/enums/MouseState.h"
-#include "../base/interfaces/IShape.h"
 #include <iostream>
 
 EntityManager::EntityManager() {

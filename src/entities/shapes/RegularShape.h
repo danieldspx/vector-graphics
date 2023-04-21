@@ -12,7 +12,7 @@ class RegularShape: public IShape {
 public:
     fvec2 center;
     int div;
-    float radius, r, g, b;
+    float radius, startRadius, minRadius, r, g, b;
 
 
     RegularShape(fvec2 center, float radius, int div, float ang);
@@ -30,6 +30,12 @@ public:
     bool isIntersectingRotateButton(ivec2 position);
 
     void clickRotateButton(int button, int state, int wheel, int direction, ivec2 position);
+
+    void renderScaleShapeButton();
+
+    void clickScaleButton(int button, int state, int wheel, int direction, ivec2 position);
+
+    bool isIntersectingScaleButton(ivec2 position);
 };
 
 

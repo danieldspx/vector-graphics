@@ -37,7 +37,7 @@ public:
     void mouse(int button, int state, int wheel, int direction, ivec2 position) override;
 
 private:
-    EntityController entityController;
+    EntityController entityController{};
 
     // TODO: Implement method to move entitites between layers
 };

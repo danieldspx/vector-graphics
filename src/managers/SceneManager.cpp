@@ -20,9 +20,9 @@ SceneManager::SceneManager(int screenWidth, int screenHeight) {
     auto swapFocusedEntity = [&](int direction){
         this->screenVectors->swapFocusedEntity(direction);
     };
+    const char* filename = "figuras.gr";
+    auto saveOrLoadWorkspace = [&, filename](int action) {
 
-    auto saveOrLoadWorkspace = [&](int action) {
-        const char* filename = "figuras.gr";
         if (action > 0) {
             printf("\nSaving entitites to file\n");
             this->screenVectors->saveEntitiesToFile(filename);
@@ -33,6 +33,7 @@ SceneManager::SceneManager(int screenWidth, int screenHeight) {
     };
 
     toolbox = new Toolbox(ivec2{0, screenHeight/2 - height/2}, 150, height, addEntityCallback, changeColor, removeFocusedEntity, swapFocusedEntity, saveOrLoadWorkspace);
+    this->screenVectors->loadEntitiesFromFile(filename);
 }
 
 void SceneManager::mouse(int button, int state, int wheel, int direction, ivec2 position) {

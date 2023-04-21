@@ -6,6 +6,7 @@
 #include "../base/enums/MouseButton.h"
 #include "../base/enums/MouseState.h"
 #include <iostream>
+#include <algorithm>
 
 EntityManager::EntityManager() {
     entityController = EntityController{nullptr, nullptr};
@@ -27,6 +28,12 @@ void EntityManager::render(int screenWidth, int screenHeight) {
         for (auto entitty: pair.second) {
             entitty->render(screenWidth, screenHeight);
         }
+    }
+}
+
+void EntityManager::changeFocusedEntityRandomColor() {
+    if (entityController.focused) {
+        entityController.focused->changeToRandomColor();
     }
 }
 
@@ -83,6 +90,23 @@ void EntityManager::mouse(int button, int state, int wheel, int direction, ivec2
         if (entityController.shapeDragging) {
             entityController.shapeDragging->resetDrag();
             entityController.shapeDragging = nullptr;
+        }
+    }
+}
+
+//for (auto i = pair.second.begin(); i != pair.second.end(); ++i) {
+//if (entityController.focused == *i) {
+//pair.second.erase(i);
+//i--;
+//}
+//}
+
+void EntityManager::removeFocusedEntity() {
+    printf("\nRemoving focused entity\n");
+    if (entityController.focused) {
+        for (auto& pair: entities) {
+            auto& v = pair.second;
+            v.erase(std::remove(v.begin(), v.end(), entityController.focused), v.end());
         }
     }
 }

@@ -8,7 +8,6 @@
 #include "Button.h"
 #include "../base/vectors/Vector2D.h"
 #include "../gl_canvas2d.h"
-#include "shapes/Triangle.h"
 #include "shapes/RegularShape.h"
 #include <stdexcept>
 

@@ -9,6 +9,14 @@
 #include "IMouse.h"
 #include "IIntersect.h"
 
-class IEntity: public IMouse, public IRender, public IIntersect {};
+class IEntity: public IMouse, public IRender, public IIntersect {
+public:
+    float r, g, b;
+    void changeToRandomColor() {
+        r = rand() % 255;
+        g = rand() % 255;
+        b = rand() % 255;
+    };
+};
 
 #endif //VECTORGRAPHICS_IENTITY_H

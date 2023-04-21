@@ -12,7 +12,7 @@ class RegularShape: public IShape {
 public:
     fvec2 center;
     int div;
-    float radius, startRadius, minRadius, r, g, b;
+    float radius, startRadius, minRadius;
 
 
     RegularShape(fvec2 center, float radius, int div, float ang);

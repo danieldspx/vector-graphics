@@ -35,7 +35,8 @@ public:
 
     void render(int screenWidth, int screenHeight) override;
     void mouse(int button, int state, int wheel, int direction, ivec2 position) override;
-
+    void changeFocusedEntityRandomColor();
+    void removeFocusedEntity();
 private:
     EntityController entityController{};
 

@@ -13,9 +13,7 @@ RegularShape::RegularShape(fvec2 center, float _radius, int div, float _ang): ce
     startRadius = _radius;
     ang = startAng = _ang;
     minRadius = 15;
-    r = rand() % 255;
-    g = rand() % 255;
-    b = rand() % 255;
+    changeToRandomColor();
 }
 
 void RegularShape::mouse(int button, int state, int wheel, int direction, ivec2 position) {

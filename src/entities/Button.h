@@ -10,6 +10,9 @@
 #include "../base/enums/Shape.h"
 #include <functional>
 
+/**
+ * Class of Buttons for creating shapes.
+ */
 class Button: public IEntity {
 public:
     ivec2 pos;

@@ -112,6 +112,11 @@ bool RegularShape::isIntersectingRotateButton(ivec2 position) {
 }
 
 bool RegularShape::isIntersectingScaleButton(ivec2 position) {
+    /**
+     * Since we draw the this button using the same method for drawing any regular shape
+     * we need to figure what the coordinates of each point is before checking if the point
+     * is intercepting the button
+     */
     float inc = PI_2/4;
     float _ang = -M_PI_2;
     fvec2 scaleHitBoxMin, scaleHitBoxMax;
@@ -140,6 +145,11 @@ bool RegularShape::isIntersectingScaleButton(ivec2 position) {
 }
 
 bool RegularShape::isIntersecting(ivec2 position) {
+    /**
+     * Since we draw the this button using the same method for drawing any regular shape
+     * we need to figure what the coordinates of each point is before checking if the point
+     * is intercepting the button
+     */
     float inc = PI_2/div;
     float _ang = ang;
     for(int i = 0; i < div; i++) {

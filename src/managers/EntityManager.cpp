@@ -57,6 +57,7 @@ void EntityManager::mouse(int button, int state, int wheel, int direction, ivec2
         for (auto vecIt = pair.second.rbegin(); vecIt != pair.second.rend(); ++vecIt) {
             auto entity = (*vecIt);
             entity->mouse(button, state, wheel, direction, position);
+            // We need this conversion to make sure we have a IShape ref
             auto shapeEntity = dynamic_cast<IShape *>(entity);
             if (entity->isIntersecting(position)) {
                 if (entity->isFocused() && !entityController.focused) {
@@ -81,6 +82,8 @@ void EntityManager::mouse(int button, int state, int wheel, int direction, ivec2
                 entity->resetHover();
             }
 
+            // If the entity is a shape and there is a shape currently being dragged and the current entity is not
+            // the shape being dragged, reset the drag state
             if (shapeEntity && entityController.shapeDragging && shapeEntity != entityController.shapeDragging) {
                 shapeEntity->resetDrag();
             }
@@ -105,6 +108,15 @@ void EntityManager::removeFocusedEntity() {
     }
 }
 
+/**
+ * This method aims to swap entities in the vector. This is usefull if you
+ * want to draw some entities on top of each other. The reason is because
+ * the render iterates through those entities in order, so the ones that
+ * are drawn first will be below the ones drawn later.
+ *
+ * @param direction Direction of swap. If 1 is provided it swaps with the next entity. If -1 is provided
+ * it swaps with the previous entity.
+ */
 void EntityManager::swapFocusedEntity(int direction) {
     printf("\nSwapping focused entity with %s entity\n", direction > 0 ? "next" : "previous");
     if (entityController.focused) {
@@ -121,6 +133,10 @@ void EntityManager::swapFocusedEntity(int direction) {
     }
 }
 
+/**
+ * Saves entities to the provided file
+ * @param filePath
+ */
 void EntityManager::saveEntitiesToFile(const std::string& filePath) {
     std::ofstream file(filePath, std::ios::binary);
     if (!file.is_open()) {
@@ -129,8 +145,8 @@ void EntityManager::saveEntitiesToFile(const std::string& filePath) {
 
     std::vector<IEntity*> entitiesVect = entities[0];
     printf("\nSaving entities...\n");
-    IEntity::Entity2File* sts = new IEntity::Entity2File[entitiesVect.size()];
-    printf("\nTotal entities: %d\n", entitiesVect.size());
+    auto* sts = new IEntity::Entity2File[entitiesVect.size()];
+    printf("\nTotal entities: %zu\n", entitiesVect.size());
 
     int pos = 0;
     for (auto& entity: entitiesVect) {
@@ -139,14 +155,18 @@ void EntityManager::saveEntitiesToFile(const std::string& filePath) {
         pos++;
     }
 
-    printf("\nWriting: %d\n", sizeof(IEntity::Entity2File) * entitiesVect.size());
+    printf("\nWriting: %lu\n", sizeof(IEntity::Entity2File) * entitiesVect.size());
     file.write(reinterpret_cast<const char*>(sts), sizeof(IEntity::Entity2File) * entitiesVect.size());
 
     file.close();
+    // Free up memory
     delete[] sts;
 }
 
-// Loads the entities from a binary file
+/**
+ * Loads the entities from a binary file
+ * @param filePath
+ */
 void EntityManager::loadEntitiesFromFile(const std::string& filePath) {
    std::ifstream infile(filePath, std::ios::binary);
     printf("Clearing all entities first");
@@ -158,11 +178,11 @@ void EntityManager::loadEntitiesFromFile(const std::string& filePath) {
    infile.seekg(0, std::ios::beg);
 
    // determine the size of the array
-   int num_sts = size / sizeof(IEntity::Entity2File);
-    printf("\nTotal of entities: %d\n", num_sts);
+   size_t num_sts = size / sizeof(IEntity::Entity2File);
+    printf("\nTotal of entities: %ld\n", num_sts);
 
    // create an array of structs
-   IEntity::Entity2File* sts = new IEntity::Entity2File[num_sts];
+   auto* sts = new IEntity::Entity2File[num_sts];
 
    // read the array data from the file
    infile.read(reinterpret_cast<char*>(sts), size);
@@ -178,7 +198,7 @@ void EntityManager::loadEntitiesFromFile(const std::string& filePath) {
        entities[0].push_back(regShape);
    }
 
-   // free the array memory
+   // free the memory
    delete[] sts;
 }
 

@@ -39,6 +39,10 @@ public:
         resetScaleButtonDistance();
     }
 
+    /**
+     * Converts the entity to a struct. Here we have a full conversion,
+     * meaning the we populate all the fields with useful values
+     */
    Entity2File entityToStruc() {
        printf("\nReturning complete struct for entity\n");
        return Entity2File{

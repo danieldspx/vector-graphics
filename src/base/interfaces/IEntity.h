@@ -22,6 +22,9 @@ public:
         g = _g;
         b = _b;
     };
+    /**
+     * Struct create with the only purpose to save the entity into a binary file
+     */
    struct Entity2File {
        float r;
        float g;
@@ -32,8 +35,11 @@ public:
        int div;
        float ang;
    };
+   /**
+    * Converts an entity to a basic struct
+    */
    Entity2File entityToStruc() {
-       printf("entityToFile Will return basic struct");
+       printf("EntityToFile Will return basic struct");
        return Entity2File{r, g, b};
    };
 };

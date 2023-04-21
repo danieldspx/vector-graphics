@@ -37,6 +37,8 @@ SceneManager::SceneManager(int screenWidth, int screenHeight) {
 
 void SceneManager::mouse(int button, int state, int wheel, int direction, ivec2 position) {
     toolbox->mouse(button, state, wheel, direction, position);
+    // If we are clicking in the toolbox we do not forward the event to the
+    // screen vectors because we dont want them to lose the focus
     if (!toolbox->isIntersecting(position)) {
         screenVectors->mouse(button, state, wheel, direction, position);
     }

@@ -15,7 +15,10 @@
 #include <stdexcept>
 #include <functional>
 
-
+/**
+ * Class that is meant to hold Buttons that only perform an action.
+ * They do so by calling the provided callback.
+ */
 class ActionButton: public IEntity {
 public:
     ivec2 pos;

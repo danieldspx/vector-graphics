@@ -12,7 +12,7 @@ class IShape: public IEntity {
 public:
     fvec2 translate, startDraggingPos, startRotatingPos, hitBoxMin, hitBoxMax, rotateButtonPos;
     bool dragging, rotating;
-    float angRotateButton, rotateButtonRadius, rotateButtonDistance;
+    float angRotateButton, ang, startAng, startAngRotateButton, rotateButtonRadius, rotateButtonDistance;
 
     bool isDragging() const {
         return dragging;
@@ -25,7 +25,8 @@ public:
     IShape() {
         translate = fvec2 {0,0};
         dragging = rotating = false;
-        angRotateButton = M_PI_2;
+        angRotateButton = startAngRotateButton = M_PI_2;
+        ang = startAng = 0;
         rotateButtonRadius = 6;
         rotateButtonDistance = 18;
     }

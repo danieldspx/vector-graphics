@@ -41,7 +41,11 @@ public:
 
     T modulo();
 
-    T scalar(Vector2D<T> v1);
+    T dot(Vector2D<T> v1);
+
+    T angle(Vector2D<T> v1);
+
+    Vector2D<T> unit();
 };
 
 template<class T>
@@ -119,8 +123,23 @@ T Vector2D<T>::modulo() {
 }
 
 template<class T>
-T Vector2D<T>::scalar(Vector2D<T> v1) {
+T Vector2D<T>::dot(Vector2D<T> v1) {
     return x*v1.x + y*v1.y;
+}
+
+template<class T>
+T Vector2D<T>::angle(Vector2D<T> v1) {
+    auto dp = dot(v1);
+    auto angle = acos(dp/(modulo()*v1.modulo()));
+    if (v1.y*x > v1.x*y) {
+        return angle;
+    }
+    return -angle;
+}
+
+template<class T>
+Vector2D<T> Vector2D<T>::unit() {
+    return Vector2D{x/modulo(), y/modulo()};
 }
 
 typedef Vector2D<int> ivec2;

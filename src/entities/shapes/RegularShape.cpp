@@ -7,9 +7,10 @@
 #include "../../base/enums/MouseState.h"
 #include <cmath>
 
-RegularShape::RegularShape(fvec2 center, float radius, int div, float ang): center(center), radius(radius), div(div), ang(ang) {
+RegularShape::RegularShape(fvec2 center, float radius, int div, float _ang): center(center), radius(radius), div(div) {
     resetFocus();
     resetHover();
+    ang = startAng = _ang;
     r = rand() % 255;
     g = rand() % 255;
     b = rand() % 255;
@@ -45,13 +46,10 @@ void RegularShape::mouse(int button, int state, int wheel, int direction, ivec2 
     }
 
     if (rotating) {
-        auto fPos = fvec2{static_cast<float>(position.x) - rotateButtonPos.x, static_cast<float>(position.y) - rotateButtonPos.y};
-        printf("\nMouse (%f, %f) (%f, %f)\n", fPos.x, fPos.y, startRotatingPos.x, startRotatingPos.y);
-//        if (fPos.x == startRotatingPos.x) fPos.x += 0.000001;
-        printf("\nangle cos: %f\n", acos( startRotatingPos.scalar(fPos)/(startRotatingPos.modulo() * fPos.modulo()) ));
-        angRotateButton = acos( startRotatingPos.scalar(fPos)/(startRotatingPos.modulo() * fPos.modulo()) );
-        //ang += angRotateButton;
-//        startRotatingPos = fPos;
+        auto fPos = fvec2{static_cast<float>(position.x) - center.x, static_cast<float>(position.y) - center.y}.unit();
+        auto rotationAngle = startRotatingPos.angle(fPos);
+        angRotateButton = startAngRotateButton + rotationAngle;
+        ang = startAng + rotationAngle;
     }
 }
 
@@ -70,6 +68,8 @@ void RegularShape::render(int screenWidth, int screenHeight) {
 
     renderRotateButton();
 }
+
+
 
 void RegularShape::renderRotateButton() {
     rotateButtonPos.x = cos(angRotateButton)*(radius + rotateButtonDistance) + center.x;
@@ -122,6 +122,9 @@ void RegularShape::click(int button, int state, int wheel, int direction, ivec2 
 void RegularShape::clickRotateButton(int button, int state, int wheel, int direction, ivec2 position) {
     if (state == MouseState::Down) {
         rotating = focused = true;
-        startRotatingPos = fvec2{static_cast<float>(position.x), static_cast<float>(position.y)};
+        startAngRotateButton = angRotateButton;
+        startAng = ang;
+        startRotatingPos = fvec2{static_cast<float>(position.x) - center.x, static_cast<float>(position.y) - center.y}.unit();
+//        startRotatingPos = fvec2{static_cast<float>(position.x), static_cast<float>(position.y)};
     }
 }

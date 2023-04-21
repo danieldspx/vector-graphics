@@ -88,18 +88,18 @@ void Button::createShape() {
 
 void Button::createTriangle() {
     printf("\nAdding Triangle Entity");
-    float radius = 30;
+    float radius = 50;
     addEntityCallback(new RegularShape(fvec2{static_cast<float>(screenWidth/2), static_cast<float>(screenHeight/2)}, radius, 3, PI/2));
 }
 
 void Button::createSquare() {
     printf("\nAdding Square Entity");
-    float radius = 30;
+    float radius = 50;
     addEntityCallback(new RegularShape(fvec2{static_cast<float>(screenWidth/2), static_cast<float>(screenHeight/2)}, radius, 4, PI/4));
 }
 
 void Button::createHexagon() {
     printf("\nAdding Hexagon Entity");
-    float radius = 30;
+    float radius = 50;
     addEntityCallback(new RegularShape(fvec2{static_cast<float>(screenWidth/2), static_cast<float>(screenHeight/2)}, radius, 6, 0));
 }

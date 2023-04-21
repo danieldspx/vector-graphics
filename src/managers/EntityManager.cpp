@@ -168,7 +168,12 @@ void EntityManager::saveEntitiesToFile(const std::string& filePath) {
  * @param filePath
  */
 void EntityManager::loadEntitiesFromFile(const std::string& filePath) {
-   std::ifstream infile(filePath, std::ios::binary);
+    std::ifstream infile(filePath, std::ios::binary);
+    if (!infile.good()) {
+        printf("\nCannot load entities: File does not exist.\nContinuing...\n");
+        return;
+    }
+
     printf("Clearing all entities first");
     entities[0].clear();
     printf("\nLoading entities...\n");

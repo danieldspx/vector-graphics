@@ -6,7 +6,10 @@
 #define VECTORGRAPHICS_ISHAPE_H
 
 #include "IEntity.h"
+#define _USE_MATH_DEFINES
 #include <cmath>
+
+# define FW_M_PI_2		1.57079632679489661923 /* pi/2 */
 
 class IShape: public IEntity {
 public:
@@ -31,7 +34,7 @@ public:
 
     IShape() {
         dragging = rotating = scaling = false;
-        angRotateButton = startAngRotateButton = M_PI_2;
+        angRotateButton = startAngRotateButton = FW_M_PI_2;
         ang = startAng = 0;
         rotateButtonRadius = 6;
         scaleButtonRadius = 6;

@@ -5,7 +5,9 @@
 #include "RegularShape.h"
 #include "../../gl_canvas2d.h"
 #include "../../base/enums/MouseState.h"
+#define _USE_MATH_DEFINES
 #include <cmath>
+# define FW_M_PI_2		1.57079632679489661923 /* pi/2 */
 
 RegularShape::RegularShape(fvec2 _center, float _radius, int _div, float _ang) {
     resetFocus();
@@ -98,8 +100,8 @@ void RegularShape::renderRotateButton() {
 }
 
 void RegularShape::renderScaleShapeButton() {
-    scaleShapePos.x = cos(-M_PI_2)*(startRadius + scaleButtonDistance) + center.x;
-    scaleShapePos.y = sin(-M_PI_2)*(startRadius + scaleButtonDistance) + center.y;
+    scaleShapePos.x = cos(-FW_M_PI_2)*(startRadius + scaleButtonDistance) + center.x;
+    scaleShapePos.y = sin(-FW_M_PI_2)*(startRadius + scaleButtonDistance) + center.y;
     CV::color(1, 0, 0);
     CV::circleFill(scaleShapePos.x, scaleShapePos.y, scaleButtonRadius, 4, PI/4);
 }
@@ -118,7 +120,7 @@ bool RegularShape::isIntersectingScaleButton(ivec2 position) {
      * is intercepting the button
      */
     float inc = PI_2/4;
-    float _ang = -M_PI_2;
+    float _ang = -FW_M_PI_2;
     fvec2 scaleHitBoxMin, scaleHitBoxMax;
     for(int i = 0; i < 4; i++) {
         float x = cos(_ang)*scaleButtonRadius + scaleShapePos.x;

@@ -7,7 +7,6 @@
 
 enum Shape {
     Square,
-    Rectangle,
     Triangle,
     Hexagon
 };

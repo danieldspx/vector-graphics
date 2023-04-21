@@ -6,7 +6,7 @@
 #include "../gl_canvas2d.h"
 
 SceneManager::SceneManager(int screenWidth, int screenHeight) {
-    int height = 500;
+    int height = 400;
     screenVectors = new EntityManager();
     auto addEntityCallback = [&](IEntity* entity){
         this->screenVectors->addEntity(entity, 0);
@@ -17,7 +17,11 @@ SceneManager::SceneManager(int screenWidth, int screenHeight) {
     auto changeColor = [&](){
         this->screenVectors->changeFocusedEntityRandomColor();
     };
-    toolbox = new Toolbox(ivec2{0, screenHeight/2 - height/2}, 150, height, addEntityCallback, changeColor, removeFocusedEntity);
+    auto swapFocusedEntity = [&](int direction){
+        this->screenVectors->swapFocusedEntity(direction);
+    };
+
+    toolbox = new Toolbox(ivec2{0, screenHeight/2 - height/2}, 150, height, addEntityCallback, changeColor, removeFocusedEntity, swapFocusedEntity);
 }
 
 void SceneManager::mouse(int button, int state, int wheel, int direction, ivec2 position) {

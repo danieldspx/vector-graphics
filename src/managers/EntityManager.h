@@ -37,10 +37,9 @@ public:
     void mouse(int button, int state, int wheel, int direction, ivec2 position) override;
     void changeFocusedEntityRandomColor();
     void removeFocusedEntity();
+    void swapFocusedEntity(int direction);
 private:
     EntityController entityController{};
-
-    // TODO: Implement method to move entitites between layers
 };
 
 

@@ -94,13 +94,6 @@ void EntityManager::mouse(int button, int state, int wheel, int direction, ivec2
     }
 }
 
-//for (auto i = pair.second.begin(); i != pair.second.end(); ++i) {
-//if (entityController.focused == *i) {
-//pair.second.erase(i);
-//i--;
-//}
-//}
-
 void EntityManager::removeFocusedEntity() {
     printf("\nRemoving focused entity\n");
     if (entityController.focused) {
@@ -110,3 +103,20 @@ void EntityManager::removeFocusedEntity() {
         }
     }
 }
+
+void EntityManager::swapFocusedEntity(int direction) {
+    printf("\nSwapping focused entity with %s entity\n", direction > 0 ? "next" : "previous");
+    if (entityController.focused) {
+        for (auto& pair : entities) {
+            auto& v = pair.second;
+            auto it = std::find(v.begin(), v.end(), entityController.focused);
+            if (it != v.end() && ((direction > 0 && std::next(it) != v.end()) || (direction < 0 && it != v.begin()))) {
+                auto newIt = std::next(it, direction);
+                std::iter_swap(it, newIt);
+                entityController.focused = *newIt;
+                break;
+            }
+        }
+    }
+}
+

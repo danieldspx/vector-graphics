@@ -20,10 +20,11 @@ public:
     std::function<void(IEntity*)> addEntityCallback;
     std::function<void()> changeColorCallback;
     std::function<void()> removeEntityCallback;
+    std::function<void(int)> swapFocusedEntity;
 
     bool isIntersecting(ivec2 position) override;
 
-    Toolbox(ivec2 position, int width, int height, std::function<void(IEntity*)> addEntityCallback, std::function<void()> changeColorCallback, std::function<void()> _removeEntityCallback);
+    Toolbox(ivec2 position, int width, int height, std::function<void(IEntity*)> addEntityCallback, std::function<void()> changeColorCallback, std::function<void()> removeEntityCallback, std::function<void(int)> swapFocusedEntity);
 
     void mouse(int button, int state, int wheel, int direction, ivec2 position) override;
 
